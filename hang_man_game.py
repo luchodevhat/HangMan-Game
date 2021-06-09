@@ -12,19 +12,18 @@ def read():
             palabras.append(line)
         palabra_escogida = random.choice(palabras)
 
-    for size in palabra_escogida:
-        print("_ ", end='')
-    print("")
+    while True:
 
-    letra = input("")
+        for size in palabra_escogida:
+            print("_ ", end='')
+        print("")
 
+        lista_letras = list(palabra_escogida)
+        letra = input("")
 
-
-
-
-
-
-
+        for i in lista_letras:
+            if letra == i:
+                print("correct")
 
 
 
@@ -53,7 +52,7 @@ def main():
 
 
         elif usuario_uno == 2:
-            print(os.system("cls"))
+            os.system("cls")
             print("Reglas")
             print("Regla 1: adivinar la palabra")
             print("Regla 2: Tienes un total de 8 vidas")

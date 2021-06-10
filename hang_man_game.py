@@ -5,26 +5,42 @@ import ascii_magic
 
 # Esta funcion guarda las palabras de data en una lista y ejecuta las funcionalidades del juego
 def read():
+
+    palabra_secreta = []
     palabras = []
 
-    with open("./files/data.txt", "r", encoding="utf-8") as f:
+    with open("./files/data.txt", "r", encoding="utf-8") as f:  # aqui guardamos el archivo data en un una lista
         for line in f:
             palabras.append(line)
+
         palabra_escogida = random.choice(palabras)
+        lista_letras = list(palabra_escogida)
+
+        print(palabra_escogida)
+        for size in lista_letras:
+            palabra_secreta.append("-")
+        palabra_secreta.pop(-1)
+
+        for i in palabra_secreta:
+            print(i, "", end='')
+
 
     while True:
 
-        for size in palabra_escogida:
-            print("_ ", end='')
-        print("")
-
-        lista_letras = list(palabra_escogida)
         letra = input("")
 
-        for i in lista_letras:
-            if letra == i:
+        try:
+
+            if lista_letras.index(letra) >= 0:
+                palabra_secreta[lista_letras.index(letra)] = letra   # verificar no reconoce palabaras repetidas
+                indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(x) > 1] # encuentra indices repetidos
+
+                for i in palabra_secreta:
+                    print(i, "", end='')
                 print("correct")
 
+        except ValueError:
+            print("incorrect")
 
 
 
@@ -59,9 +75,13 @@ def main():
 
 
 
-        else:
+        elif usuario_uno == 3:
             print("Gracias por jugar...")
             break
+
+
+        else:
+            print("Opcion invalida")
 
 
 if __name__ == '__main__':

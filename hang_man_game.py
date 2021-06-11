@@ -15,10 +15,9 @@ def read():
 
         palabra_escogida = random.choice(palabras)
         lista_letras = list(palabra_escogida)
-
         print(palabra_escogida)
-        for size in lista_letras:
-            palabra_secreta.append("-")
+
+        palabra_secreta = ["-" for i in lista_letras]
         palabra_secreta.pop(-1)
 
         for i in palabra_secreta:
@@ -32,15 +31,24 @@ def read():
         try:
 
             if lista_letras.index(letra) >= 0:
-                palabra_secreta[lista_letras.index(letra)] = letra   # verificar no reconoce palabaras repetidas
-                indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(x) > 1] # encuentra indices repetidos
+                palabra_secreta[lista_letras.index(letra)] = letra
+
+                indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(x) > 1] # encuentra palabras repetidas, (arreglar el error) y crear la funcion de ganar
+                for i in indices_repetidos:
+                    palabra_secreta[i] = letra
 
                 for i in palabra_secreta:
                     print(i, "", end='')
                 print("correct")
 
+
         except ValueError:
+
+            for i in palabra_secreta:
+                print(i, "", end='')
             print("incorrect")
+
+
 
 
 

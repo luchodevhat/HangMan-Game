@@ -6,7 +6,6 @@ import ascii_magic
 # Esta funcion crea la imagen ascii mediante el modulo ascii_magic
 
 def showAscii():
-    # Este codigo convierte la imagen a codigo ascii
     os.system("cls")
     output = ascii_magic.from_image_file("./image/calabaza.jpg", columns=100, char="@")
     ascii_magic.to_terminal(output)

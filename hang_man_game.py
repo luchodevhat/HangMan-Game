@@ -84,6 +84,7 @@ def foundLetter(palabras, palabr_secreta):
 
                 indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(
                     x) > 1]  # encuentra palabras repetidas, (arreglar el error) y crear la funcion de ganar
+                    
                 for i in indices_repetidos:
                     palabra_secreta[i] = letra
 

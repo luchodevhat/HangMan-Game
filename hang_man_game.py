@@ -1,6 +1,17 @@
 import os
 import random
-import ascii_magic
+import os
+#import ascii_magic
+
+
+# Esta funcion limpia todo lo contenido en pantalla
+
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
+        command = 'cls'
+    os.system(command)
+
 
 
 # Esta funcion crea la imagen ascii mediante el modulo ascii_magic
@@ -11,7 +22,7 @@ def showAscii():
     ascii_magic.to_terminal(output)
 
 
-# Esta funcion guarda las palabras de data en una lista
+# Esta funcion accede a data y guarda texto aleatorio en una lista
 
 def read():
     palabra_secreta = []
@@ -35,7 +46,10 @@ def menu():
         usuario_uno = int(input("Escoge una de estas 3 opciones "))
 
         if usuario_uno == 1:
-            showAscii()
+            #showAscii()
+            clearConsole()
+            print("Bienvenido el juego va a comenzar")
+            print("La palabra es")
             read()
             break
 
@@ -53,18 +67,21 @@ def menu():
 # Esta funcion muestra las reglas del juego
 
 def showRules():
-    pass
+    clearConsole()
+    print("REGLAS")
+    print()
+    print("1- Debes adivinar la letra contenida en la palabra")
+    print("2- Una vez acertadas todas las letras ganaras")
+    print()
 
 
 
 # Esta funcion se encarga de darle funcionalidad al juego
 
 def foundLetter(palabras, palabr_secreta):
+
     palabra_escogida = random.choice(palabras)
     lista_letras = list(palabra_escogida)
-
-    print("Bienvenido el juego va a comenzar")
-    print("La palabra es")
     print(palabra_escogida)
 
     palabra_secreta = ["-" for i in lista_letras]
@@ -82,22 +99,34 @@ def foundLetter(palabras, palabr_secreta):
             if lista_letras.index(letra) >= 0:
                 palabra_secreta[lista_letras.index(letra)] = letra
 
+
                 indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(
-                    x) > 1]  # encuentra palabras repetidas, (arreglar el error) y crear la funcion de ganar
+                    x) > 1]  
+
+                for i in indices_repetidos:  
+                    if lista_letras[i] == letra:
+                        palabra_secreta[i] = lista_letras[i]
+                    else:
+                        pass
                     
-                for i in indices_repetidos:
-                    palabra_secreta[i] = letra
 
                 for i in palabra_secreta:
                     print(i, "", end='')
                 print("correct")
 
+            
+                
 
         except ValueError:
 
             for i in palabra_secreta:
                 print(i, "", end='')
             print("incorrect")
+            
+
+
+def youWin():
+    pass
 
 
 def main():
@@ -106,4 +135,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    test = "test"

@@ -72,7 +72,6 @@ def showRules():
     print()
     print("1- Debes adivinar la letra contenida en la palabra")
     print("2- Una vez acertadas todas las letras ganaras")
-    print()
     print("3- Tienes un limite de 10 vidas")
     print()
 

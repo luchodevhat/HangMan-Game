@@ -73,6 +73,8 @@ def showRules():
     print("1- Debes adivinar la letra contenida en la palabra")
     print("2- Una vez acertadas todas las letras ganaras")
     print()
+    print("3- Tienes un limite de 10 vidas")
+    print()
 
 
 
@@ -90,48 +92,70 @@ def foundLetter(palabras, palabr_secreta):
     for i in palabra_secreta:
         print(i, "", end='')
 
-    while True:
+        
+    for i in range(0,10):
+            letra = input("")
 
-        letra = input("")
+            try:
 
-        try:
-
-            if lista_letras.index(letra) >= 0:
-                palabra_secreta[lista_letras.index(letra)] = letra
+                if lista_letras.index(letra) >= 0:
+                    palabra_secreta[lista_letras.index(letra)] = letra
 
 
-                indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(
-                    x) > 1]  
+                    indices_repetidos = [i for i, x in enumerate(lista_letras) if lista_letras.count(
+                        x) > 1]  
 
-                for i in indices_repetidos:  
-                    if lista_letras[i] == letra:
-                        palabra_secreta[i] = lista_letras[i]
-                    else:
-                        pass
-                    
+                    for i in indices_repetidos:  
+                        if lista_letras[i] == letra:
+                            palabra_secreta[i] = lista_letras[i]
+                        else:
+                            pass
+                        
+
+                    for i in palabra_secreta:
+                        print(i, "", end='')
+                    print("correct")
+        
+
+            except ValueError:
 
                 for i in palabra_secreta:
                     print(i, "", end='')
-                print("correct")
-
-            
-                
-
-        except ValueError:
-
-            for i in palabra_secreta:
-                print(i, "", end='')
-            print("incorrect")
-            
+                print("incorrect")
+    checkWin(palabra_secreta)
+        
 
 
+# Esta funcion se encarga de dar el mensaje final si ganaste
 def youWin():
-    pass
+    clearConsole()
+    print("Felicidades!!!")
+    print("Has ganado el juego!!")
 
 
-def main():
-    menu()
+
+
+# Esta funcion se encarga de dar el mensaje final si perdiste
+def youLose():
+    clearConsole()
+    print("Que triste eres demasiado malo!!!")
+    print("Has perdido el juego")
+
+
+
+
+# Esta funcion se encarga de verificar si has ganado o no
+def checkWin(palabra_secreta):
+    for i in palabra_secreta:
+        if i == "-":
+            youLose()
+            break
+        else:
+            youWin()
+    
+    
+
 
 
 if __name__ == '__main__':
-    main()
+    menu()
